@@ -11,12 +11,12 @@ class productosSeeder extends Seeder
     {
         DB::table('productos')->insert([
             [
-                'nombre' => 'Smartphone',
-                'descripcion' => 'Teléfono inteligente',
+                'nombre' => 'Prendas',
+                'descripcion' => 'Vestido, Camisa, Pantalon.',
                 'precio' => 299.99,
                 'stock' => 10,
                 'categoria_id' => 1,
-                'imagen_url' => 'smartphone.jpg',
+                'imagen_url' => 'prendas.jpg',
                 'created_at' => now(),
             ],
             [

@@ -10,8 +10,8 @@ class categoriasSeeder extends Seeder
     public function run()
     {
         DB::table('categorias')->insert([
-            ['nombre' => 'Electrónica', 'descripcion' => 'Productos electrónicos', 'created_at' => now()],
-            ['nombre' => 'Ropa', 'descripcion' => 'Prendas de vestir', 'created_at' => now()],
+            ['nombre' => 'Vestidos', 'descripcion' => 'Camisas', 'created_at' => now()],
+            ['nombre' => 'Pantalon', 'descripcion' => 'Pantalones', 'created_at' => now()],
         ]);
     }
 }

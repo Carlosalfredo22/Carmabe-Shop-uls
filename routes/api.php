@@ -7,6 +7,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\DetallesPedidoController;
+use App\Http\Controllers\MetodoPagoController;
+use App\Http\Controllers\PagoController;
 
 // Rutas protegidas por el middleware 'auth:sanctum'
 Route::post('/register', [AuthController::class, 'register']);

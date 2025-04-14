@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class CategoriaController extends Controller
 {
     public function index()
     {

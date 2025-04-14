@@ -16,5 +16,6 @@ Route::middleware(['auth:sanctum','role:admin'])->group(function () {
     //Agregar las demas rutas ejemplo pedido.
     Route::resource('metodos-pago', MetodoPagoController::class);
     Route::resource('pagos', PagoController::class);
-    
+
 });
+

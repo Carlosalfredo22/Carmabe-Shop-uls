@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\DetallesPedidoController;
@@ -22,7 +22,7 @@ Route::middleware(['auth:sanctum','role:admin'])->group(function () {
     //Agregar las demas rutas ejemplo pedido.
     Route::resource('metodos-pago', MetodoPagoController::class);
     Route::resource('pagos', PagoController::class);
-    Route::resource('categorias', CategoryController::class);
+    Route::resource('categorias', CategoriaController::class);
     Route::resource('productos', ProductoController::class);
     Route::resource('pedidos', PedidosController::class);
     Route::resource('detalles-pedido', DetallesPedidoController::class);

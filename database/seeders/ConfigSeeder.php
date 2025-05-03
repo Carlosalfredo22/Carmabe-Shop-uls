@@ -13,25 +13,52 @@ use function Laravel\Prompts\password;
 
 class ConfigSeeder extends Seeder
 {
-    /**
+/**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $user = User::create(["password" => Hash::make('password1234'),
-        "name" => "carlos", "email" => "carlosalfredo123@gmail.com" ]);
-    
-        $role = Role::create([
+        // Crear o buscar el rol "admin"
+        $role = Role::firstOrCreate([
             "name" => 'admin'
         ]);
 
-        $permiso = Permission::create([
+        // Crear o buscar el permiso "crear"
+        $permiso = Permission::firstOrCreate([
             "name" => 'crear'
         ]);
 
-        $role->givePermissionTo($permiso);
+        // Asignar el permiso al rol (si no se ha asignado aún)
+        if (!$role->hasPermissionTo($permiso)) {
+            $role->givePermissionTo($permiso);
+        }
 
-        $user->assignRole($role->name);
-        
+        // Crear usuario Carlos
+        $carlos = User::firstOrCreate(
+            ["email" => "carlosalfredo123@gmail.com"],
+            [
+                "name" => "carlos",
+                "password" => Hash::make('password1234')
+            ]
+        );
+
+        // Asignar el rol al usuario Carlos (si aún no lo tiene)
+        if (!$carlos->hasRole($role)) {
+            $carlos->assignRole($role->name);
+        }
+
+        // Crear usuario Mario
+        $mario = User::firstOrCreate(
+            ["email" => "mario@example.com"],
+            [
+                "name" => "mario",
+                "password" => Hash::make('password1234')
+            ]
+        );
+
+        // Asignar el rol al usuario Mario (si aún no lo tiene)
+        if (!$mario->hasRole($role)) {
+            $mario->assignRole($role->name);
+        }
     }
 }

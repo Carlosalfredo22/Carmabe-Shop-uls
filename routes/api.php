@@ -9,6 +9,7 @@ use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\DetallesPedidoController;
 use App\Http\Controllers\MetodoPagoController;
 use App\Http\Controllers\PagoController;
+use App\Http\Controllers\UsuarioController;
 
 // Rutas protegidas por el middleware 'auth:sanctum'
 Route::post('/register', [AuthController::class, 'register']);
@@ -18,6 +19,7 @@ Route::middleware(['auth:sanctum','role:admin'])->group(function () {
     Route::resource('roles', RoleController::class);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user', [AuthController::class, 'userProfile']);
+    Route::get('/usuarios', [UsuarioController::class, 'index']);
 
     //Agregar las demas rutas ejemplo pedido.
     Route::resource('metodos-pago', MetodoPagoController::class);

@@ -2,63 +2,62 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-use function Laravel\Prompts\password;
-
 class ConfigSeeder extends Seeder
 {
-/**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        // Crear o buscar el rol "admin"
-        $role = Role::firstOrCreate([
-            "name" => 'admin'
-        ]);
+        // Roles y permisos específicos
+        $roles = [
+            'admin' => ['crear'],
+            'cliente' => ['ver', 'editar_datos']
+        ];
 
-        // Crear o buscar el permiso "crear"
-        $permiso = Permission::firstOrCreate([
-            "name" => 'crear'
-        ]);
+        // Crear roles y permisos, y asignar permisos a cada rol
+        foreach ($roles as $roleName => $permisos) {
+            $role = Role::firstOrCreate(['name' => $roleName]);
 
-        // Asignar el permiso al rol (si no se ha asignado aún)
-        if (!$role->hasPermissionTo($permiso)) {
-            $role->givePermissionTo($permiso);
+            foreach ($permisos as $permisoNombre) {
+                $permiso = Permission::firstOrCreate(['name' => $permisoNombre]);
+                if (!$role->hasPermissionTo($permiso)) {
+                    $role->givePermissionTo($permiso);
+                }
+            }
         }
 
-        // Crear usuario Carlos
+        // Crear usuario Carlos con rol admin
         $carlos = User::firstOrCreate(
-            ["email" => "carlosalfredo123@gmail.com"],
+            ['email' => 'carlosalfredo123@gmail.com'],
             [
-                "name" => "carlos",
-                "password" => Hash::make('password1234')
+                'name' => 'carlos',
+                'password' => Hash::make('password1234'),
             ]
         );
+        $carlos->assignRole('admin');
 
-        // Asignar el rol al usuario Carlos (si aún no lo tiene)
-        if (!$carlos->hasRole($role)) {
-            $carlos->assignRole($role->name);
-        }
-
-        // Crear usuario Mario
+        // Crear usuario Mario con rol admin
         $mario = User::firstOrCreate(
-            ["email" => "mario@example.com"],
+            ['email' => 'mario@example.com'],
             [
-                "name" => "mario",
-                "password" => Hash::make('password1234')
+                'name' => 'mario',
+                'password' => Hash::make('password1234'),
             ]
         );
+        $mario->assignRole('admin');
 
-        // Asignar el rol al usuario Mario (si aún no lo tiene)
-        if (!$mario->hasRole($role)) {
-            $mario->assignRole($role->name);
-        }
+        // Crear usuario Cliente con rol cliente
+        $cliente = User::firstOrCreate(
+            ['email' => 'cliente@example.com'],
+            [
+                'name' => 'cliente',
+                'password' => Hash::make('password1234'),
+            ]
+        );
+        $cliente->assignRole('cliente');
     }
 }

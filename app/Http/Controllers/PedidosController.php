@@ -16,7 +16,7 @@ class PedidosController extends Controller
         $validated = $request->validate([
             'usuario_id' => 'required|exists:users,id',
             'total' => 'required|numeric|min:0',
-            'estado' => 'required|in:pendiente,enviado,entregado,cancelado',
+            'estado' => 'required|in:pagado,pendiente,enviado,entregado,cancelado',
             'fecha_pedido' => 'nullable|date',
         ]);
 

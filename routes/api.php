@@ -29,3 +29,8 @@ Route::middleware(['auth:sanctum','role:admin'])->group(function () {
     Route::resource('pedidos', PedidosController::class);
     Route::resource('detalles-pedido', DetallesPedidoController::class);
 });
+
+
+Route::prefix('cliente')->middleware(['auth:sanctum', 'role:cliente'])->group(function () {
+    Route::get('/categorias',[CategoriaController::class, 'index']);
+});

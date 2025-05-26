@@ -33,4 +33,8 @@ Route::middleware(['auth:sanctum','role:admin'])->group(function () {
 
 Route::prefix('cliente')->middleware(['auth:sanctum', 'role:cliente'])->group(function () {
     Route::get('/categorias',[CategoriaController::class, 'index']);
+    Route::get('/productos',[ProductoController::class, 'index']);
+    Route::get('/pedidos',[PedidosController::class, 'index']);
+    Route::get('/pagos', [PagoController::class, 'index']);
+    Route::get('/metodos-pago', [MetodoPagoController::class, 'index']);
 });

@@ -21,6 +21,11 @@ class Pedidos extends Model
         return $this->belongsTo(User::class, 'usuario_id');
     }
 
+    public function detallesPedido()
+    {
+        return $this->hasMany(DetallesPedido::class, 'pedido_id');
+    }
+
     public function pagos()
     {
         return $this->hasMany(Pago::class);

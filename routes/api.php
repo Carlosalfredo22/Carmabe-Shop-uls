@@ -36,10 +36,10 @@ Route::prefix('cliente')->middleware(['auth:sanctum', 'role:cliente'])->group(fu
     Route::get('/productos',[ProductoController::class, 'index']);
     Route::get('/pedidos',[PedidosController::class, 'index']);
     Route::post('/pedidos',[PedidosController::class, 'storeCliente']);
-    Route::get('/pagos', [PagoController::class, 'index']);
-    Route::get('/pagos/{id}', [PagoController::class, 'show']);
-    Route::post('/pagos', [PagoController::class, 'store']);
-    Route::put('/pagos/{id}', [PagoController::class, 'update']);
-    Route::delete('/pagos/{id}', [PagoController::class, 'destroy']);
+    // Métodos de Pago
     Route::get('/metodos-pago', [MetodoPagoController::class, 'index']);
+    Route::get('/metodos-pago/{id}', [MetodoPagoController::class, 'show']);
+    Route::post('/metodos-pago', [MetodoPagoController::class, 'store']);
+    Route::put('/metodos-pago/{id}', [MetodoPagoController::class, 'update']);
+    Route::delete('/metodos-pago/{id}', [MetodoPagoController::class, 'destroy']);
 });

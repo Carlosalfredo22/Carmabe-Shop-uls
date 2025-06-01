@@ -37,8 +37,9 @@ Route::prefix('cliente')->middleware(['auth:sanctum', 'role:cliente'])->group(fu
     Route::get('/pedidos',[PedidosController::class, 'index']);
     Route::post('/pedidos',[PedidosController::class, 'storeCliente']);
     Route::get('/pagos', [PagoController::class, 'index']);
+    Route::get('/pagos/{id}', [PagoController::class, 'show']);
     Route::post('/pagos', [PagoController::class, 'store']);
-    Route::post('/pagos/update/{id}', [PagoController::class, 'update']);
-    Route::post('/pagos/destroy/{id}', [PagoController::class, 'destroy']);
+    Route::put('/pagos/{id}', [PagoController::class, 'update']);
+    Route::delete('/pagos/{id}', [PagoController::class, 'destroy']);
     Route::get('/metodos-pago', [MetodoPagoController::class, 'index']);
 });
